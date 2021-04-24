@@ -8,7 +8,7 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body" id="app">
-                <chat-app :user="{{auth()->user()}}" />
+                <chat-app :user="{{auth()->user()}}" /></chat-app>
                 </div>
             </div>
         </div>

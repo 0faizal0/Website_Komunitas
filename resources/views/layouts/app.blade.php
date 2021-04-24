@@ -74,6 +74,9 @@
                                     <a href="{{ route('home') }}" class="dropdown-item">
                                         Home
                                     </a>
+                                    <a href="{{ route('group') }}" class="dropdown-item">
+                                        Group Chat
+                                    </a>
                                     <a href="{{ route('profile.edit') }}" class="dropdown-item">
                                         Edit Profile
                                     </a>

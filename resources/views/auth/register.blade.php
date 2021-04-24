@@ -148,11 +148,8 @@
 <script src="{{ asset('templete/vendor/chartjs/Chart.bundle.min.js"')}}></script>
 <script src="{{ asset('templete/vendor/select2/select2.min.js')}}">
 </script>
-
 <!-- Main JS-->
 <script src="{{ asset('templete/js/main.js')}}"></script>
-
 </body>
-
 </html>
 <!-- end document-->

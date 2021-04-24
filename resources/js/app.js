@@ -4,9 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue');
+window.Vue = require("vue");
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,15 +19,55 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('vue-login', require('./components/login.vue').default);
-Vue.component('vue-register', require('./components/register.vue').default);
+/* Vue.component(
+    "example-component",
+    require("./components/ExampleComponent.vue").default
+); */
 
+Vue.component(
+    "chat-messages",
+    require("./components/ChatMessages.vue").default
+);
+Vue.component("chat-form", require("./components/ChatForm.vue").default);
 
-import ChatApp from './components/ChatApp'
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
 const app = new Vue({
-    el: '#app',
-    components:{
-        ChatApp
+    el: "#app",
+
+    data: {
+        messages: [],
+    },
+
+    created() {
+        this.fetchMessages();
+
+        // Add listener only once
+        Echo.private("chat").listen("MessageSent", (e) => {
+            this.messages.push({
+                message: e.message.message,
+                user: e.user,
+            });
+        });
+    },
+
+    methods: {
+        fetchMessages() {
+            axios.get("/messages").then((response) => {
+                this.messages = response.data;
+            });
+        },
+
+        addMessage(message) {
+            this.messages.push(message);
+
+            axios.post("/messages", message).then((response) => {
+                console.log(response.data);
+            });
+        },
     },
 });

@@ -34,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    public $redirectTo = RouteServiceProvider::HOME;
+    // public $redirectTo = RouteServiceProvider::HOME;
 
     public function redirect(){
         $role = Auth::User('role');
@@ -124,7 +124,7 @@ class RegisterController extends Controller
     public function status_update($id){
 
         $data = \DB::table('users')->where('id',$id)->first();
-        $status = $data['isban'];
+        $status = $data->isban ;
 
         if($status == 1){
             \DB::table('users')->where('id',$id)->update([

@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\ChatController;
-
-
+use App\Http\Controllers\ChatsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +13,10 @@ use App\Http\Controllers\ChatController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,9 +48,7 @@ Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
 
-Route::get('/group', function () {
-    return view('group');
-})->name('group');
+Route::get('/group', [App\Http\Controllers\ChatsController::class, 'index'])->name('group');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
